@@ -1,88 +1,44 @@
 # BETON INSIGHT PRO
 
-BETON INSIGHT PRO est une application académique développée avec Python et Streamlit pour l'analyse statistique, probabiliste et prédictive des résistances du béton à 28 jours.
+Application Streamlit pour analyser des résultats d'essais de résistance du béton à 28 jours.
 
-## Objectif
+## Fonctions
 
-L'application permet d'exploiter les résultats d'essais de résistance du béton afin de :
+- Import de fichiers CSV et Excel (.xlsx).
+- Détection des résistances manquantes, illisibles, nulles ou négatives.
+- Repérage des lignes entièrement dupliquées.
+- Indicateurs : moyenne, médiane, écart-type, coefficient de variation, minimum, maximum et taux au-dessus du seuil choisi.
+- Comparaison des lots avec un graphique.
+- Export du rapport texte, des essais analysés et du contrôle qualité en CSV.
+- Jeu de démonstration fictif disponible à l'ouverture.
 
-- calculer les principales statistiques descriptives ;
-- comparer les résistances à un seuil de référence ;
-- estimer des probabilités sous hypothèse de normalité ;
-- étudier les corrélations entre certaines variables ;
-- réaliser des régressions linéaires simples ;
-- réaliser une régression linéaire multiple ;
-- effectuer une simulation prédictive ;
-- exporter les résultats sous forme de rapport et de fichier CSV.
+Les fichiers importés ne sont pas enregistrés par l'application. Les données de démonstration sont fictives. Le seuil de conformité est configurable et doit correspondre aux spécifications du projet.
 
-## Fonctionnalités
+## Lancer en local sous Windows
 
-### Vue d'ensemble
-Affichage des principaux indicateurs :
-- nombre d'essais ;
-- résistance moyenne ;
-- taux de valeurs supérieures ou égales au seuil ;
-- risque estimé de résistance sous le seuil.
+Dans PowerShell, depuis le dossier du projet :
 
-### Données
-- saisie manuelle des résistances ;
-- import de fichiers Excel ou CSV ;
-- affichage du tableau des essais.
-
-### Statistiques
-Calcul de :
-- moyenne ;
-- médiane ;
-- variance ;
-- écart-type ;
-- coefficient de variation ;
-- minimum ;
-- maximum.
-
-### Analyse probabiliste
-Estimation de :
-
-P(R >= seuil)
-
-et
-
-P(R < seuil)
-
-sous hypothèse de distribution normale.
-
-### Modélisation
-Étude de la relation entre :
-- le rapport eau/ciment ;
-- le dosage en ciment ;
-- la résistance du béton à 28 jours.
-
-L'application propose :
-- une régression simple sur le rapport E/C ;
-- une régression simple sur le dosage en ciment ;
-- une régression linéaire multiple.
-
-### Simulateur
-Le simulateur permet d'estimer une résistance à partir :
-- du rapport eau/ciment ;
-- du dosage en ciment.
-
-### Rapport
-L'application permet d'exporter :
-- un rapport texte ;
-- les résultats au format CSV.
-
-## Technologies utilisées
-
-- Python
-- Streamlit
-- Pandas
-- NumPy
-- Matplotlib
-- OpenPyXL
-
-## Lancement local
-
-Dans le terminal, exécuter :
-
-```bash
+~~~powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 streamlit run app.py
+~~~
+
+## Déployer sur Render
+
+Créer un Web Service connecté au dépôt, puis utiliser :
+
+- Branch : main
+- Root Directory : laisser vide
+- Build Command : pip install -r requirements.txt
+- Start Command : streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
+
+## Déployer sur Streamlit Community Cloud
+
+Créer une application depuis le dépôt GitHub, avec :
+
+- Branch : main
+- Main file path : app.py
+
+Le fichier requirements.txt à la racine déclare les dépendances Python.
